@@ -5,9 +5,9 @@
 class Triangle
 {
 private:
-	Point P1, P2, P3;
-	Line L1, L2, L3;
-	double width = 0;
+	const Point P1, P2, P3;
+	const Line L1, L2, L3;
+	double width;
 public:
 	Triangle(const Point& P1, const Point& P2, const Point& P3);
 	const Point& getPoint1() const;

@@ -7,7 +7,7 @@ Polynomial::Polynomial()
 {
 }
 
-Polynomial::Polynomial(const double& a, const double& b, const double& c, const double& d, const double& e, const double& f = 0) :
+Polynomial::Polynomial(const double& a, const double& b, const double& c, const double& d, const double& e, const double& f) :
 	a(a), 
 	b(b), 
 	c(c), 
@@ -18,12 +18,12 @@ Polynomial::Polynomial(const double& a, const double& b, const double& c, const 
 	
 }
 
-const Polynomial& Polynomial::createDerivative() const
+const Polynomial Polynomial::createDerivative() const
 {
 	return Polynomial(4 * a*a + e * e, 4 * a*b + 2 * d*e, 4 * c*c + e * e, 2 * b*e + 4 * c*d, 4 * a*e + 4 * c*e, b*b + d * d);
 }
 
-const PairOfDoubles& Polynomial::getExtremumOnTriangle(const Triangle & triangle) const
+const PairOfDoubles Polynomial::getExtremumOnTriangle(const Triangle & triangle) const
 {
 	PairOfDoubles pairOfDoubles;
 	pairOfDoubles.addCandidate(valueAtPoint(triangle.getPoint1()));

@@ -5,4 +5,16 @@ PolynomialAndDerivativePack::PolynomialAndDerivativePack(const Polynomial& polyn
 {
 	PolynomialAndDerivativePack::polynomial = polynomial;
 	derivative = polynomial.createDerivative();
+
+}
+
+double PolynomialAndDerivativePack::maxDerivative(Triangle triangle)
+{
+	return derivative.getExtremumOnTriangle(triangle).max;
+}
+
+double PolynomialAndDerivativePack::diffreneceBeetwenMinAndMaxValue(Triangle triangle)
+{
+	PairOfDoubles extremes = derivative.getExtremumOnTriangle(triangle);
+	return extremes.max - extremes.min;
 }
