@@ -1,14 +1,15 @@
 #pragma once
 #include "Point.h"
 
-class Line
+//Ax + By + c == 0
+struct Line
 {
-public:
 	double a, b, c;
-	Line(const Point& P1, const Point& P2) {
-		b = P1.x - P2.x;
+	constexpr Line (const Point& P1, const Point& P2) : a (), b (), c ()
+	{
 		a = P1.y - P2.y;
-		if (a != 0) a = -1 / a;
+		b = P1.x - P2.x;
+		if ( a != 0 ) a = -1 / a;
 		else b = -1 / b;
 		c = -(a * P1.x) - (b * P1.y);
 	}
