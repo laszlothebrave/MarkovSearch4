@@ -4,12 +4,17 @@ class MinMaxCandidates
 public:
 	double min;
 	double max;
-	constexpr MinMaxCandidates() : min(DBL_MAX), max(DBL_MIN) {};
+	constexpr MinMaxCandidates (const double &point) : min (point), max (point) {};
 
-	constexpr void updateCandidate(const double& candidate) 
+	constexpr void updateCandidate (const double& candidate)
 	{
-		if (candidate < min) min = candidate;
-		if (candidate > max) max = candidate;
+		if (candidate >= min) min = candidate;
+		if (candidate <= max) max = candidate;
+	}
+
+	friend std::ostream& operator<<(std::ostream& out, const MinMaxCandidates& val)
+	{
+		return out << val.min << ", " << val.max;
 	}
 };
 

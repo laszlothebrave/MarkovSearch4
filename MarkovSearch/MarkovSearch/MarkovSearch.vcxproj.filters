@@ -33,6 +33,9 @@
     <ClInclude Include="MinMaxCandidates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Xor128.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
