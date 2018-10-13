@@ -77,8 +77,8 @@ struct Polynomial
 
 	constexpr double getGlobalExtremum (const Triangle& t) const
 	{
-		const double x = (-(2 * b*c) + (d*e)) / ((4 * a*c) - e * e);
-		const double y = ((2 * a*d) - (b*e)) / ((4 * a*c) - (e*e));
+		const double x = (-2 * b*c + d * e) / (4 * a*c - e * e);
+		const double y = (2 * a*d - b * e) / (4 * a*c - e * e);
 
 		if (t.contains (x, y))
 			return valueAtPoint (x, y);

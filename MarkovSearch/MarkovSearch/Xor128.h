@@ -65,7 +65,6 @@ struct Xor128Rng
 	/* This is the jump function for the generator. It is equivalent
 	to 2^64 calls to next(); it can be used to generate 2^64
 	non-overlapping subsequences for parallel computations. */
-
 	constexpr void jump (void) noexcept
 	{
 		uint64_t s0 = 0;
