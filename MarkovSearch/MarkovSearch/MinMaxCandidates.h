@@ -4,7 +4,8 @@ class MinMaxCandidates
 public:
 	double min;
 	double max;
-	constexpr MinMaxCandidates (const double &point) : min (point), max (point) {};
+	constexpr MinMaxCandidates (const double &point) : min (point), max (point)
+	{};
 
 	constexpr void updateCandidate (const double& candidate)
 	{

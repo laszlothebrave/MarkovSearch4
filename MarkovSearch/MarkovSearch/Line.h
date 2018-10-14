@@ -16,14 +16,13 @@ struct Line
 		assert (a*P2.x + b * P2.y + c <= 10e-10);
 	}
 
-	constexpr double operator()(const double&x, const double& y)const
+	constexpr double operator()(const double&x, const double& y) const
 	{
 		return a * x + b * y + c;
 	}
 
-	constexpr double operator()(const Point& p)const
+	constexpr double operator()(const Point& p) const
 	{
 		return operator()(p.x, p.y);
 	}
 };
-

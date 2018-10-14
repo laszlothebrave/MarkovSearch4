@@ -7,7 +7,7 @@
 //x1<=x2<=x3 || x3<=x2<=x1
 constexpr bool areOrdered (const double& x1, const double& x2, const double& x3)
 {
-	return x3 <= x2 && x2 <= x2 || x1 <= x2 && x2 <= x3;
+	return x3 <= x2 && x2 <= x1 || x1 <= x2 && x2 <= x3;
 }
 
 struct Polynomial
@@ -63,7 +63,7 @@ struct Polynomial
 		return minMax;
 	}
 
-	constexpr double getExtremumOnLine (const Line& line, const Point& P1, const Point& P2)const
+	constexpr double getExtremumOnLine (const Line& line, const Point& P1, const Point& P2) const
 	{
 		const double denominator = 2 * (c*line.a*line.a - e * line.a*line.b + a * line.b*line.b);
 		const double x = ((d*line.a*line.b) - (b*line.b*line.b) - (2 * c*line.a*line.c) + (e*line.b*line.c)) / denominator;

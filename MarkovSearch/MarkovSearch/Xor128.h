@@ -43,7 +43,7 @@ struct Xor128Rng
 	constexpr Xor128Rng (const uint64_t& seed1 = 427202026, const uint64_t& seed2 = 924392770) : s{ seed1,seed2 }
 	{}
 
-	constexpr inline uint64_t rotl (const uint64_t& x, const int& k) noexcept
+	constexpr inline uint64_t rotl (const uint64_t& x, const int& k) const noexcept
 	{
 		return (x << k) | (x >> (64 - k));
 	}
@@ -85,7 +85,7 @@ struct Xor128Rng
 	//[0,1)
 	constexpr inline double toDouble (const uint64_t& x) const noexcept
 	{
-		union { uint64_t i; double d; } u{ UINT64_C (0x3FF) << 52 | x >> 12 };
+		union { uint64_t i; double d; } u{ (UINT64_C (0x3FF) << 52) | x >> 12 };
 
 		return u.d - 1.0;
 	}
