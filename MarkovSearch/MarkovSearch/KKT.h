@@ -7,8 +7,10 @@ namespace kkt
 {
 	Xor128Rng rng;
 
-	constexpr Polynomial randomPolynomial (const Polynomial& p, const double& radius = 10)
+	constexpr Polynomial randomPolynomial (const Polynomial& p)
 	{
+		const double& radius = 10;
+
 		return Polynomial (p.a + rng.nextDouble (-radius, radius),
 			p.b + rng.nextDouble (-radius, radius),
 			p.c + rng.nextDouble (-radius, radius),
