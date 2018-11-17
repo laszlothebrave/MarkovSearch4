@@ -4,18 +4,6 @@
 #include "vector"
 #include "MinMaxCandidate.h"
 
-//x1<=x2<=x3 || x3<=x2<=x1
-constexpr bool inline areOrdered (const double& x1, const double& x2, const double& x3)
-{
-	return x3 <= x2 == x2 <= x1;
-}
-
-//p2 on [p1,p3]
-constexpr bool inline isOnInterval (const Point& p1, const Point& p2, const Point& p3)
-{
-	return areOrdered (p1.x, p2.x, p3.x) && areOrdered (p1.y, p2.y, p3.y);
-}
-
 //a*x^2 + b*x + c*y^2 + d*y + e*x*y + f
 struct Polynomial
 {
@@ -68,17 +56,17 @@ struct Polynomial
 
 		{
 			Point p = getExtremumOnLine (l1);
-			if (isOnInterval (p1, p, p2))
+			if (utils::isOnInterval (p1, p, p2))
 				minMax.updateCandidate (valueAtPoint (p));
 		}
 		{
 			Point p = getExtremumOnLine (l2);
-			if (isOnInterval (p2, p, p3))
+			if (utils::isOnInterval (p2, p, p3))
 				minMax.updateCandidate (valueAtPoint (p));
 		}
 		{
 			Point p = getExtremumOnLine (l3);
-			if (isOnInterval (p1, p, p3))
+			if (utils::isOnInterval (p1, p, p3))
 				minMax.updateCandidate (valueAtPoint (p));
 		}
 		{

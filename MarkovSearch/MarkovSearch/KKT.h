@@ -26,23 +26,23 @@ namespace kkt
 		Polynomial derivative = startingPolynomial.getDerivative ();
 
 		double dfMax = derivative.extremumOn (area).max;
-		double fabsMax = startingPolynomial.extremumOn (area).absDifference () / 4;
-		double bestVal = fabsMax / dfMax;
+		double fabsMax = utils::pow2(startingPolynomial.extremumOn (area).absDifference () / 2);
+		double bestVal = dfMax / fabsMax;
 
 		for (int i = 0; i < iterations; ++i)
 		{
-			Polynomial candidate = gen (bestPolynomial);
-			Polynomial candidateDerivative = candidate.getDerivative ();
-			MinMaxCandidate candidateExtrema = candidate.extremumOn (area);
+			const Polynomial candidate = gen (bestPolynomial);
+			const Polynomial candidateDerivative = candidate.getDerivative ();
+			const MinMaxCandidate candidateExtrema = candidate.extremumOn (area);
 
-			const double df = candidateExtrema.absDifference () / 4;
-			const double fabs = candidateDerivative.extremumOn (area).max;
-			const double val = fabs / df;
+			const double fabs = utils::pow2(candidateExtrema.absDifference () / 2);
+			const double df = candidateDerivative.extremumOn (area).max;
+			const double val = df / fabs;
 
 			if (val > bestVal)
 			{
 				bestPolynomial = candidate;
-				bestPolynomial.f = -(candidateExtrema.max + candidateExtrema.min) / 4;
+				bestPolynomial.f = -(candidateExtrema.max + candidateExtrema.min) / 2;
 				bestVal = val;
 			}
 		}

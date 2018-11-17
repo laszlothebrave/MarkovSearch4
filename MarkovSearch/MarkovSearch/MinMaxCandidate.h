@@ -15,8 +15,8 @@ public:
 
 	constexpr void updateCandidate (const double& candidate)
 	{
-		if (candidate >= min) min = candidate;
-		if (candidate <= max) max = candidate;
+		if (candidate <= min) min = candidate;
+		if (candidate >= max) max = candidate;
 	}
 
 	constexpr double absDifference ()const
