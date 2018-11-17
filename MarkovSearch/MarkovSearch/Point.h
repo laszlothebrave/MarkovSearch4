@@ -5,7 +5,8 @@
 struct Point
 {
 	double x, y;
-	constexpr Point (const double& x, const double& y) : x (x), y (y) {};
+	constexpr Point (const double& x, const double& y) :
+		x (x), y (y) {};
 
 	friend std::ostream& operator<<(std::ostream& out, const Point& val)
 	{

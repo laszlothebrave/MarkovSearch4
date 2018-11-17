@@ -40,10 +40,11 @@ struct Xor128Rng
 {
 	uint64_t s[2];
 
-	constexpr Xor128Rng (const uint64_t& seed1 = 427202026, const uint64_t& seed2 = 924392770) : s{ seed1,seed2 }
+	constexpr Xor128Rng (const uint64_t& seed1 = 427202026, const uint64_t& seed2 = 924392770) noexcept
+		: s{ seed1,seed2 }
 	{}
 
-	constexpr inline uint64_t rotl (const uint64_t& x, const int& k) const noexcept
+	constexpr uint64_t rotl (const uint64_t& x, const int& k) const noexcept
 	{
 		return (x << k) | (x >> (64 - k));
 	}
@@ -51,10 +52,9 @@ struct Xor128Rng
 	constexpr uint64_t inline nextRandom (void) noexcept
 	{
 		const uint64_t s0 = s[0];
-		uint64_t s1 = s[1];
+		const uint64_t s1 = s[1] ^ s0;
 		const uint64_t result = s0 + s1;
 
-		s1 ^= s0;
 		s[0] = rotl (s0, 24) ^ s1 ^ (s1 << 16); // a, b
 		s[1] = rotl (s1, 37); // c
 
@@ -90,7 +90,7 @@ struct Xor128Rng
 		return u.d - 1.0;
 	}
 
-	constexpr inline double nextDouble (const double& low, const double& high) noexcept
+	constexpr inline double nextDouble (const double& low = 0, const double& high = 1) noexcept
 	{
 		return toDouble (nextRandom ())*(high - low) + low;
 	}

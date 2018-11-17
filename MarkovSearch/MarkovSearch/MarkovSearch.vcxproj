@@ -165,8 +165,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="KKT.h" />
     <ClInclude Include="Line.h" />
-    <ClInclude Include="MinMaxCandidates.h" />
+    <ClInclude Include="MinMaxCandidate.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Polynomial.h" />

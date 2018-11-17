@@ -1,60 +1,51 @@
 #pragma once
 #include <tuple>
+#include <algorithm>
 
-#include "Point.h"
-#include "Line.h"
+#include "pch.h"
 
-class Triangle
+struct Triangle
 {
 private:
-	const Point P1, P2, P3;
-	const Line L1, L2, L3;
-	double width;
-
-	constexpr void updateWidth (const double& candidate)
+	constexpr double calculateWidthSquare ()
 	{
-		if (candidate < width) width = candidate;
+		const double h1 = pow2 (l1.a*p3.x + l1.b*p3.y + l1.c) / (l1.a*l1.a + l1.b*l1.b);
+		const double h2 = pow2 (l2.a*p1.x + l2.b*p1.y + l2.c) / (l2.a*l2.a + l2.b*l2.b);
+		const double h3 = pow2 (l3.a*p2.x + l3.b*p2.y + l3.c) / (l3.a*l3.a + l3.b*l3.b);
+
+		return std::min ({ h1, h2, h3 });
 	}
 
-	constexpr double pow2 (const double& val) const
+public:
+	const Point p1, p2, p3;
+	const Line l1, l2, l3;
+	const double width;
+
+	constexpr double pow2 (const double val) const
 	{
 		return val * val;
 	}
 
-public:
-	constexpr Triangle (const Point& P1, const Point& P2, const Point& P3) :
-		P1 (P1), P2 (P2), P3 (P3),
-		L1 (Line (P1, P2)), L2 (Line (P2, P3)), L3 (Line (P3, P1)),
-		width (DBL_MAX)
+	constexpr Triangle (const Point& p1, const Point& p2, const Point& p3) :
+		p1 (p1), p2 (p2), p3 (p3),
+		l1 (Line (p1, p2)), l2 (Line (p2, p3)), l3 (Line (p3, p1)),
+		width (calculateWidthSquare ())
 	{
-		updateWidth (pow2 (L1.a*P3.x + L1.b*P3.y + L1.c) / (L1.a*L1.a + L1.b*L1.b));
-		updateWidth (pow2 (L2.a*P1.x + L2.b*P1.y + L2.c) / (L2.a*L2.a + L2.b*L2.b));
-		updateWidth (pow2 (L3.a*P2.x + L3.b*P2.y + L3.c) / (L3.a*L3.a + L3.b*L3.b));
 	}
 
-	constexpr auto getPoints () const
+	constexpr bool contains (const double x, const double y) const
 	{
-		return std::tuple{ P1, P2, P3 };
+		return (l1 (x, y) <= 0) &&
+			(l2 (x, y) <= 0) &&
+			(l3 (x, y) <= 0);
 	}
 
-	constexpr auto getLines () const
-	{
-		return std::tuple{ L1, L2, L3 };
-	}
-
-	constexpr bool contains (const double& x, const double& y) const
-	{
-		return (L1 (x, y) <= 0) &&
-			(L2 (x, y) <= 0) &&
-			(L3 (x, y) <= 0);
-	}
-
-	constexpr inline bool contains (const Point& p) const
+	constexpr inline bool contains (const Point p) const
 	{
 		return contains (p.x, p.y);
 	}
 
-	constexpr double getWidthCube () const
+	constexpr double getWidthSquare () const
 	{
 		return width;
 	}
