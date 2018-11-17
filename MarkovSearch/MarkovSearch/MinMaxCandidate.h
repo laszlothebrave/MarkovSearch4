@@ -4,7 +4,6 @@
 
 struct MinMaxCandidate
 {
-public:
 	double min;
 	double max;
 
@@ -25,6 +24,11 @@ public:
 		u.i &= ~0ull >> 1; //bits and hacks
 
 		return u.d;
+	}
+
+	constexpr double maxAbs ()const
+	{
+		return 0;
 	}
 
 	friend std::ostream& operator<<(std::ostream& out, const MinMaxCandidate& val)

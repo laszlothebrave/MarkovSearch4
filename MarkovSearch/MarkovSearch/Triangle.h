@@ -17,16 +17,17 @@ private:
 	}
 
 public:
-	const Point p1, p2, p3;
-	const Line l1, l2, l3;
-	const double width;
+	Point p1, p2, p3;
+	Line l1, l2, l3;
+	double width;
 
 	constexpr Triangle (const Point& p1, const Point& p2, const Point& p3) :
 		p1 (p1), p2 (p2), p3 (p3),
 		l1 (Line (p1, p2)), l2 (Line (p2, p3)), l3 (Line (p3, p1)),
 		width (calculateWidthSquare ())
-	{
-	}
+	{}
+
+	constexpr Triangle (const Triangle&) = default;
 
 	constexpr bool contains (const double x, const double y) const
 	{
@@ -48,6 +49,11 @@ public:
 	double getWidth () const
 	{
 		return std::sqrt (width);
+	}
+
+	friend std::ostream& operator<<(std::ostream& out, const Triangle& t)
+	{
+		return out << '(' << t.p1 << "), (" << t.p2 << "), (" << t.p3 << ')';
 	}
 };
 

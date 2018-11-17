@@ -20,7 +20,7 @@ struct Polynomial
 		return Polynomial (4 * a*a + e * e, 4 * a*b + 2 * d*e, 4 * c*c + e * e, 2 * b*e + 4 * c*d, 4 * a*e + 4 * c*e, b*b + d * d);
 	}
 
-	constexpr inline double operator()(const double x, const double y) const
+	constexpr inline double operator()(const double& x, const double& y) const
 	{
 		return a * x*x + b * x + c * y*y + d * y + e * x*y + f;
 	}
